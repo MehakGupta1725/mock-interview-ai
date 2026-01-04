@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // PASTE YOUR KEY HERE
-const genAI = new GoogleGenerativeAI("AIzaSyAp2me5C5sOKNLfUknXBNvbJb9OWYshEJQ");
+const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
 
 async function checkModels() {
   try {
