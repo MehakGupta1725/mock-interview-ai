@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Mock Interview</title>
+  
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    
+    <div class="brand-title">Mock<span class="brand-highlight">Interview</span></div>
+    <p class="page-subtitle">Welcome back! Please login to continue.</p>
+
+    <div class="form-group">
+      <label class="form-label" for="email">Email Address</label>
+      <input type="email" id="email" placeholder="john@example.com">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••">
+    </div>
+
+    <button class="btn-submit" onclick="login()">Sign In</button>
+
+    <div id="msg" class="msg-box"></div>
+
+    <div class="auth-footer">
+      New here? <a href="signup.html">Create an account</a>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

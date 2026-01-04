@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Interview Professional</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <header class="header">
+    <div class="logo-area">
+      <div class="brand-icon"></div>
+      <h2>Mock<span class="highlight">Interview</span></h2>
+    </div>
+    
+    <div class="header-actions">
+       <div class="user-profile">
+         <div class="avatar" id="userAvatar">U</div>
+         <span id="userName">User</span>
+       </div>
+       <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <div class="card setup-card" id="setupCard">
+      <div class="card-header">
+        <h3>Configure Session</h3>
+        <p class="subtitle">Choose your focus area to begin the simulation.</p>
+      </div>
+      
+      <div class="form-group">
+        <label for="type">Interview Focus</label>
+        <div class="select-wrapper">
+          <select id="type">
+            <option value="hr">HR & Behavioral</option>
+            <option value="technical">Technical (Java/Spring)</option>
+            <option value="system-design">System Design</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top: 15px;">
+        <label for="qLimit">Number of Questions</label>
+        <input type="number" id="qLimit" min="1" max="10" value="5" 
+               style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px;">
+      </div>
+
+      <button class="btn-primary full-width" onclick="startInterview()">Start Simulation</button>
+    </div>
+
+    <div class="card history-card" id="historyCard">
+      <div class="card-header history-header">
+        <h3>Your Progress</h3>
+        <div class="stats-summary">
+          Total Tests: <span id="totalTestsCount">0</span>
+        </div>
+      </div>
+
+      <div class="trend-container" id="trendContainer">
+        <p class="subtitle">No tests taken yet. Start your first simulation!</p>
+      </div>
+
+      <hr class="divider">
+
+      <h4 style="font-size: 0.95rem; margin-bottom: 15px; color: #475569;">Recent Attempts</h4>
+      <div class="history-list" id="historyList">
+        </div>
+    </div>
+
+    <div class="card question-card hidden" id="questionCard">
+      
+      <div class="session-stats">
+        <div class="recording-indicator">
+          <div class="recording-dot"></div>
+          <span>REC Live</span>
+        </div>
+        
+        <div class="timer-badge">
+          <span class="icon-clock">⏰</span>
+          <span id="timer">05:00</span>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Question <span id="qCount">1</span> of <span id="totalCount">5</span></span>
+          <span id="topicBadge" class="tag tag-technical">Technical</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <h3 id="question">Loading Question...</h3>
+      </div>
+
+      <div class="input-area">
+        <textarea id="answer" placeholder="Type your answer here... try to use technical keywords relevant to the topic."></textarea>
+      </div>
+<div style="margin-top:10px;">
+  <button onclick="startVoiceAnswer()">🎤 Speak</button>
+  <button onclick="stopVoiceAnswer()">⏹ Stop</button>
+</div>
+
+      <div class="actions">
+        <button class="btn-secondary" onclick="skipQuestion()">Skip</button>
+        <div class="right-actions">
+          <button class="btn-primary" onclick="submitAnswer()">Submit Answer</button>
+          <button class="btn-next" onclick="nextQuestion()">Next <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hidden" id="reportCard">
+      
+      <div class="report-header">
+        <div>
+          <h3 id="resultTitle">Evaluation Report</h3>
+          <p id="resultMessage" class="subtitle" style="margin-bottom: 0;">Generating feedback...</p>
+        </div>
+        <div class="score-circle">
+          <span id="finalScore">0</span>%
+        </div>
+      </div>
+
+      <div class="feedback-grid">
+        <div class="feedback-box strength-box">
+          <h4>💪 Strengths</h4>
+          <ul id="strengthList"></ul>
+        </div>
+        <div class="feedback-box weakness-box">
+          <h4>⚠️ Improvements Needed</h4>
+          <ul id="weaknessList"></ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h4 style="margin-bottom: 15px;">Answer Review</h4>
+      <div id="reviewList" class="review-container">
+        </div>
+
+      <div class="actions" style="justify-content: center; margin-top: 30px;">
+        <button class="btn-primary" onclick="restartInterview()">Back to Dashboard</button>
+        <button class="btn-secondary" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

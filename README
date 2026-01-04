@@ -1,0 +1,26 @@
+# AI Mock Interview Platform
+
+An AI-powered mock interview platform that helps users practice interviews using
+text and voice-based answers with intelligent feedback.
+
+## Features
+- Text-based interview questions
+- Voice-based answers (Speech-to-Text)
+- AI-powered answer evaluation
+- Grammar, fluency, and confidence scoring
+- Interview history and progress tracking
+- Professional dashboard UI
+
+## Tech Stack
+- Frontend: HTML, CSS, JavaScript
+- Backend: Node.js, Express
+- AI Engine: Python, Flask, spaCy
+- Database: MySQL (or Local Storage for history)
+
+## How to Run
+1. Start backend server
+2. Start AI engine (Flask)
+3. Open frontend in browser
+
+## Status
+🚧 Active Development
