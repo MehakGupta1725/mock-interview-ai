@@ -1,3 +1,5 @@
+const API_BASE = "https://mock-interview-ai-dez1.onrender.com";
+
 // --- Configuration ---
 let TOTAL_QUESTIONS = 5; 
 const TIME_PER_QUESTION = 300; 
@@ -39,7 +41,7 @@ async function signup() {
   }
 
   try {
-    const res = await fetch('/auth/signup', {
+    const res = await fetch(`${API_BASE}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password })
@@ -68,7 +70,7 @@ async function login() {
   const msg = document.getElementById("msg");
 
   try {
-    const res = await fetch('/auth/login', {
+    const res = await fetch(`${API_BASE}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password })
@@ -201,7 +203,7 @@ async function startInterview() {
 
   // Fetch Questions
   try {
-      const response = await fetch(`/question/${selectedType}`);
+      const response = await fetch(`${API_BASE}/question/${selectedType}`);
       if (!response.ok) throw new Error("Failed to fetch questions");
       
       const categoryData = await response.json();
@@ -337,7 +339,7 @@ async function finishSession() {
       continue;
     }
 
-const res = await fetch("/ai/evaluate-answer", {
+const res = await fetch(`${API_BASE}/ai/evaluate-answer`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({

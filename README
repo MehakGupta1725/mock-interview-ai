@@ -1,19 +1,43 @@
 # 🎯 AI Mock Interview Platform
 
-An AI-powered mock interview platform designed to help users practice interviews through text and voice responses with intelligent performance analysis and real-time feedback.
+An AI-powered full-stack mock interview platform that helps users prepare for technical, HR, and system design interviews using intelligent AI-based answer evaluation, speech analysis, and real-time feedback.
+
+---
+
+## 🌟 Overview
+
+The AI Mock Interview Platform simulates real interview scenarios where users can practice answering questions, receive AI-generated evaluations, and improve communication, grammar, fluency, and confidence.
+
+The platform supports:
+
+- HR Interview Preparation
+- Technical Interview Practice
+- System Design Interviews
+- Text & Voice Responses
+- AI-Driven Answer Assessment
 
 ---
 
 ## 🚀 Features
 
+### 🎤 Interview Experience
 ✅ Text-Based Interview Questions  
 ✅ Voice Answer Support (Speech-to-Text)  
+✅ Multiple Interview Categories  
+✅ Real-Time Interview Simulation  
+
+### 🤖 AI Evaluation Engine
 ✅ AI-Powered Answer Evaluation  
-✅ Grammar & Fluency Analysis  
-✅ Confidence Scoring System  
-✅ Interview History Tracking  
+✅ Grammar Analysis  
+✅ Fluency Scoring  
+✅ Confidence Assessment  
+✅ Keyword Matching & Relevance Check  
+
+### 📊 User Experience
+✅ User Authentication (Signup/Login)  
+✅ Interview Question Database  
 ✅ Professional Dashboard UI  
-✅ Real-Time Feedback Generation
+✅ Progress & Performance Tracking  
 
 ---
 
@@ -32,57 +56,108 @@ An AI-powered mock interview platform designed to help users practice interviews
 - Python
 - Flask
 - spaCy
+- NLP Processing
 
 ### Database
-- MySQL
-- Local Storage (Development)
+- MySQL (Railway Cloud Database)
+
+### Deployment
+- Backend → Render
+- AI Engine → Render
+- Database → Railway
+- Frontend → Vercel
 
 ---
 
-## 📂 Project Architecture
+## 🏗 System Architecture
 
 ```txt
-Frontend
-   ↓
-Node.js / Express Backend
-   ↓
-Flask AI Engine
-   ↓
-MySQL Database
+            Frontend (HTML/CSS/JS)
+                     │
+                     ▼
+        Node.js + Express Backend API
+                     │
+                     ▼
+          Flask AI Evaluation Engine
+                     │
+                     ▼
+            MySQL Cloud Database
+```
+
+---
+
+## 📂 Project Structure
+
+```txt
+AI-MOCK-INTERVIEW/
+│
+├── frontend/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── signup.html
+│   ├── script.js
+│   └── css/
+│
+├── backend/
+│   ├── server.js
+│   ├── db.js
+│   └── routes/
+│       ├── auth.js
+│       ├── ai.js
+│       └── interview.js
+│
+├── ai-engine/
+│   ├── app.py
+│   ├── evaluator.py
+│   └── requirements.txt
+│
+└── README.md
 ```
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 1. Clone Repository
+### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd YOUR_REPOSITORY
+git clone https://github.com/MehakGupta1725/mock-interview-ai.git
+cd mock-interview-ai
 ```
 
-### 2. Install Backend Dependencies
+---
+
+### 2️⃣ Setup Backend
+
+Navigate to backend:
+
+```bash
+cd backend
+```
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### 3. Start Node Backend
+Start backend:
 
 ```bash
-npm start
+node server.js
 ```
 
-### 4. Setup AI Engine
+---
 
-Move to Python service directory:
+### 3️⃣ Setup AI Engine
+
+Navigate to AI Engine:
 
 ```bash
 cd ai-engine
 ```
 
-Install dependencies:
+Install requirements:
 
 ```bash
 pip install -r requirements.txt
@@ -94,55 +169,107 @@ Run Flask server:
 python app.py
 ```
 
-### 5. Launch Frontend
+---
+
+### 4️⃣ Setup Database
+
+Create MySQL database:
+
+```sql
+CREATE DATABASE mock_interview_db;
+```
+
+Create required tables:
+
+- users
+- questions
+
+Configure environment variables.
+
+---
+
+### 5️⃣ Launch Frontend
 
 Open:
 
 ```txt
-index.html
+frontend/index.html
 ```
 
-or use Live Server extension.
+or use **VS Code Live Server**.
 
 ---
 
-## 🌐 Live Demo
+## 🔐 Environment Variables
 
-[Live Demo Link](YOUR_DEPLOYED_LINK)
+Backend `.env`
+
+```env
+MYSQLHOST=
+MYSQLPORT=
+MYSQLUSER=
+MYSQLPASSWORD=
+MYSQLDATABASE=
+```
 
 ---
 
-## 📸 Screenshots
+## 🌐 Live Deployment
 
-Add screenshots here after deployment.
+### Frontend
+https://mock-interview-ai-lovat.vercel.app
 
-Example:
+### Backend API
+https://mock-interview-ai-dez1.onrender.com
 
-- Dashboard UI
-- Interview Session
-- AI Feedback Screen
+
+---
+
+
+## 📋 Sample Question Categories
+
+### HR Questions
+- Tell me about yourself.
+- Where do you see yourself in 5 years?
+- Describe a workplace conflict you resolved.
+
+### Technical Questions
+- Explain REST APIs.
+- Difference between Process and Thread.
+- ACID Properties in Databases.
+
+### System Design Questions
+- Design a URL Shortener.
+- Design a Chat Application.
+- Explain CAP Theorem.
 
 ---
 
 ## 🔮 Future Improvements
 
 - JWT Authentication
-- User Login/Signup
-- Multi-Language Interview Support
-- AI Generated Custom Questions
-- Cloud Database Integration
+- OAuth Login
+- Multi-Language Support
+- AI-Generated Dynamic Questions
 - Analytics Dashboard
+- Audio Emotion Detection
+- Personalized Performance Reports
 
 ---
 
 ## 👩‍💻 Author
 
-Mehak Gupta
+**Mehak Gupta**
 
-GitHub: https://github.com/MehakGupta1725
+GitHub:  
+https://github.com/MehakGupta1725
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
+
+---
+
+⭐ If you found this project useful, consider giving it a star!
