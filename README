@@ -1,26 +1,148 @@
-# AI Mock Interview Platform
+# 🎯 AI Mock Interview Platform
 
-An AI-powered mock interview platform that helps users practice interviews using
-text and voice-based answers with intelligent feedback.
+An AI-powered mock interview platform designed to help users practice interviews through text and voice responses with intelligent performance analysis and real-time feedback.
 
-## Features
-- Text-based interview questions
-- Voice-based answers (Speech-to-Text)
-- AI-powered answer evaluation
-- Grammar, fluency, and confidence scoring
-- Interview history and progress tracking
-- Professional dashboard UI
+---
 
-## Tech Stack
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js, Express
-- AI Engine: Python, Flask, spaCy
-- Database: MySQL (or Local Storage for history)
+## 🚀 Features
 
-## How to Run
-1. Start backend server
-2. Start AI engine (Flask)
-3. Open frontend in browser
+✅ Text-Based Interview Questions  
+✅ Voice Answer Support (Speech-to-Text)  
+✅ AI-Powered Answer Evaluation  
+✅ Grammar & Fluency Analysis  
+✅ Confidence Scoring System  
+✅ Interview History Tracking  
+✅ Professional Dashboard UI  
+✅ Real-Time Feedback Generation
 
-## Status
-🚧 Active Development
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+- Node.js
+- Express.js
+
+### AI Engine
+- Python
+- Flask
+- spaCy
+
+### Database
+- MySQL
+- Local Storage (Development)
+
+---
+
+## 📂 Project Architecture
+
+```txt
+Frontend
+   ↓
+Node.js / Express Backend
+   ↓
+Flask AI Engine
+   ↓
+MySQL Database
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+cd YOUR_REPOSITORY
+```
+
+### 2. Install Backend Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start Node Backend
+
+```bash
+npm start
+```
+
+### 4. Setup AI Engine
+
+Move to Python service directory:
+
+```bash
+cd ai-engine
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run Flask server:
+
+```bash
+python app.py
+```
+
+### 5. Launch Frontend
+
+Open:
+
+```txt
+index.html
+```
+
+or use Live Server extension.
+
+---
+
+## 🌐 Live Demo
+
+[Live Demo Link](YOUR_DEPLOYED_LINK)
+
+---
+
+## 📸 Screenshots
+
+Add screenshots here after deployment.
+
+Example:
+
+- Dashboard UI
+- Interview Session
+- AI Feedback Screen
+
+---
+
+## 🔮 Future Improvements
+
+- JWT Authentication
+- User Login/Signup
+- Multi-Language Interview Support
+- AI Generated Custom Questions
+- Cloud Database Integration
+- Analytics Dashboard
+
+---
+
+## 👩‍💻 Author
+
+Mehak Gupta
+
+GitHub: https://github.com/YOUR_USERNAME
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.

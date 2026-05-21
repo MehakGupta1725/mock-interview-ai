@@ -21,6 +21,8 @@
       <h2>Mock<span class="highlight">Interview</span></h2>
     </div>
     
+    <button class="btn-secondary" onclick="openTab('english')">English Gym</button>
+
     <div class="header-actions">
        <div class="user-profile">
          <div class="avatar" id="userAvatar">U</div>
@@ -156,6 +158,74 @@
         <button class="btn-secondary" onclick="logout()">Logout</button>
       </div>
     </div>
+
+    <div class="card hidden" id="englishGymCard">
+
+  <div class="card-header">
+    <h3>English Gym</h3>
+    <p class="subtitle">Improve fluency, grammar, pronunciation, and confidence</p>
+  </div>
+
+  <div class="english-tabs">
+    <button onclick="showEnglishSection('speak')">Speaking</button>
+    <button onclick="showEnglishSection('grammar')">Grammar</button>
+    <button onclick="showEnglishSection('pronounce')">Pronunciation</button>
+    <button onclick="showEnglishSection('vocab')">Vocabulary</button>
+    <button onclick="showEnglishSection('roleplay')">Roleplay</button>
+    <button onclick="showEnglishSection('progress')">Progress</button>
+  </div>
+
+  <div id="speak" class="english-section">
+    <h4>Speaking Practice</h4>
+    <p>Topic: <span id="speakingTopic">Describe your favorite movie</span></p>
+    <button onclick="startEnglishSpeech()">🎤 Start Speaking</button>
+    <button onclick="stopEnglishSpeech()">⏹ Stop</button>
+    <textarea id="englishSpeechText" placeholder="Your speech will appear here..."></textarea>
+    <button onclick="analyzeEnglishSpeech()">Analyze</button>
+    <div id="englishFeedback"></div>
+  </div>
+
+  <div id="grammar" class="english-section hidden">
+    <h4>Grammar Fix</h4>
+    <button onclick="startGrammarSpeech()">🎤 Speak</button>
+    <button onclick="stopGrammarSpeech()">⏹ Stop</button>
+
+    <textarea id="grammarInput" placeholder="Type or speak a sentence..."></textarea>
+    <button onclick="checkGrammar()">Fix Grammar</button>
+    <div id="grammarOutput"></div>
+  </div>
+
+  <div id="pronounce" class="english-section hidden">
+    <h4>Pronunciation Trainer</h4>
+    <p id="pronounceText">I am improving my English speaking skills.</p>
+    <button onclick="playCorrectPronunciation()">🔊 Listen</button>
+    <button onclick="startPronounce()">🎤 Repeat</button>
+    <div id="pronounceScore"></div>
+  </div>
+
+  <div id="vocab" class="english-section hidden">
+    <h4>Vocabulary Builder</h4>
+    <div id="vocabSuggestions"></div>
+  </div>
+
+  <div id="roleplay" class="english-section hidden">
+    <h4>Roleplay Practice</h4>
+    <select id="roleplayType">
+      <option value="hr">HR Interview</option>
+      <option value="office">Office Conversation</option>
+      <option value="client">Client Call</option>
+      <option value="smalltalk">Small Talk</option>
+    </select>
+    <button onclick="startRoleplay()">Start</button>
+    <div id="roleplayChat"></div>
+  </div>
+
+  <div id="progress" class="english-section hidden">
+    <h4>Your Progress</h4>
+    <div id="englishStats"></div>
+  </div>
+
+</div>
 
   </main>
 </div>

@@ -546,3 +546,307 @@ function getSpeechMetrics(text) {
     pace: words.length / duration
   };
 }
+
+// Speaking(English Gym)
+
+function openTab(tabName) {
+  document.getElementById("setupCard").classList.add("hidden");
+  document.getElementById("historyCard").classList.add("hidden");
+  document.getElementById("questionCard").classList.add("hidden");
+  document.getElementById("reportCard").classList.add("hidden");
+  document.getElementById("englishGymCard").classList.add("hidden");
+
+  if (tabName === "english") {
+    document.getElementById("englishGymCard").classList.remove("hidden");
+  }
+}
+function showEnglishSection(id) {
+  let sections = document.querySelectorAll(".english-section");
+  sections.forEach(sec => sec.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+let englishRecognition;
+let isEnglishRecording = false;
+let englishStartTime;
+
+function startEnglishSpeech() {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Speech recognition not supported in this browser.");
+    return;
+  }
+
+  englishRecognition = new webkitSpeechRecognition();
+  englishRecognition.continuous = true;
+  englishRecognition.interimResults = true;
+  englishRecognition.lang = "en-US";
+
+  let finalTranscript = "";
+  englishStartTime = new Date().getTime();
+
+  englishRecognition.onresult = function(event) {
+    let interimTranscript = "";
+
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        finalTranscript += event.results[i][0].transcript + " ";
+      } else {
+        interimTranscript += event.results[i][0].transcript;
+      }
+    }
+
+    document.getElementById("englishSpeechText").value = finalTranscript + interimTranscript;
+  };
+
+  englishRecognition.onerror = function(event) {
+    console.error("Speech error:", event.error);
+  };
+
+  englishRecognition.start();
+  isEnglishRecording = true;
+}
+
+function stopEnglishSpeech() {
+  if (englishRecognition && isEnglishRecording) {
+    englishRecognition.stop();
+    isEnglishRecording = false;
+
+    const text = document.getElementById("englishSpeechText").value;
+    const endTime = new Date().getTime();
+    const durationInSeconds = (endTime - englishStartTime) / 1000;
+
+    analyzeEnglishSpeech(text, durationInSeconds);
+
+    document.getElementById("grammarInput").value = text;
+  }
+}
+// function analyzeEnglishSpeech(text, duration) {
+//   const words = text.trim().split(/\s+/).filter(Boolean);
+//   const wordCount = words.length;
+
+//   const minutes = duration / 60;
+//   const wpm = Math.round(wordCount / minutes);
+
+//   const fillerWords = ["um", "uh", "like", "you know", "actually", "basically", "so"];
+//   let fillerCount = 0;
+
+//   fillerWords.forEach(word => {
+//     const regex = new RegExp("\\b" + word + "\\b", "gi");
+//     const matches = text.match(regex);
+//     if (matches) fillerCount += matches.length;
+//   });
+
+//   // Simple fluency score logic
+//   let fluencyScore = 10;
+
+//   if (wpm < 80) fluencyScore -= 2;
+//   if (wpm > 180) fluencyScore -= 1;
+//   if (fillerCount > 5) fluencyScore -= 2;
+//   if (wordCount < 20) fluencyScore -= 2;
+
+//   fluencyScore = Math.max(1, fluencyScore);
+
+//   const feedbackHTML = `
+//     <strong>Analysis</strong><br>
+//     🕒 Duration: ${Math.round(duration)} sec<br>
+//     📝 Word Count: ${wordCount}<br>
+//     ⚡ Speed: ${wpm} WPM<br>
+//     ❌ Filler Words: ${fillerCount}<br>
+//     ⭐ Fluency Score: ${fluencyScore}/10
+//   `;
+
+//   document.getElementById("englishFeedback").innerHTML = feedbackHTML;
+// }
+
+function analyzeEnglishSpeech(text, duration) {
+  const words = text.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+
+  const minutes = duration / 60;
+  const wpm = Math.round(wordCount / minutes);
+
+  const fillerWords = ["um", "uh", "like", "you know", "actually", "basically", "so"];
+  let fillerCount = 0;
+
+  fillerWords.forEach(word => {
+    const regex = new RegExp("\\b" + word + "\\b", "gi");
+    const matches = text.match(regex);
+    if (matches) fillerCount += matches.length;
+  });
+
+  // Sentence analysis
+  const sentences = text.split(/[.!?]/).filter(s => s.trim().length > 0);
+  const avgSentenceLength = sentences.length > 0 ? Math.round(wordCount / sentences.length) : 0;
+
+  // Vocabulary diversity
+  const uniqueWords = new Set(words);
+  const vocabDiversity = uniqueWords.size / wordCount;
+
+  // Repetition detection
+  let repetitionCount = 0;
+  for (let i = 1; i < words.length; i++) {
+    if (words[i] === words[i - 1]) repetitionCount++;
+  }
+
+  // ====== Scoring ======
+
+  let fluencyScore = 100;
+
+  // Speed penalty
+  if (wpm < 90) fluencyScore -= 15;
+  if (wpm > 180) fluencyScore -= 10;
+
+  // Filler penalty
+  if (fillerCount > 3) fluencyScore -= fillerCount * 2;
+
+  // Repetition penalty
+  fluencyScore -= repetitionCount * 3;
+
+  // Vocabulary diversity bonus/penalty
+  if (vocabDiversity < 0.4) fluencyScore -= 10;
+  if (vocabDiversity > 0.65) fluencyScore += 5;
+
+  // Short response penalty
+  if (wordCount < 25) fluencyScore -= 15;
+
+  fluencyScore = Math.max(0, Math.min(100, fluencyScore));
+
+  // Confidence estimate
+  let confidence = "Good";
+  if (wpm < 80 || fillerCount > 6) confidence = "Low";
+  if (wpm > 110 && fillerCount < 3) confidence = "High";
+
+  const feedbackHTML = `
+    <strong>Fluency Analysis</strong><br><br>
+    🕒 Duration: ${Math.round(duration)} sec<br>
+    📝 Word Count: ${wordCount}<br>
+    ⚡ Speed: ${wpm} WPM<br>
+    🧠 Avg Sentence Length: ${avgSentenceLength} words<br>
+    🔁 Repetitions: ${repetitionCount}<br>
+    ❌ Filler Words: ${fillerCount}<br>
+    📚 Vocabulary Variety: ${(vocabDiversity * 100).toFixed(1)}%<br>
+    💪 Confidence Level: ${confidence}<br><br>
+    ⭐ <strong>Fluency Score: ${fluencyScore}/100</strong>
+  `;
+
+  document.getElementById("englishFeedback").innerHTML = feedbackHTML;
+
+  saveEnglishProgress(fluencyScore, wpm, fillerCount, vocabDiversity);
+}
+
+// Grammar(English Gym)
+async function checkGrammar() {
+  const text = document.getElementById("grammarInput").value.trim();
+
+  if (!text) {
+    alert("Please enter or speak a sentence first.");
+    return;
+  }
+
+  document.getElementById("grammarOutput").innerHTML = "Checking grammar...";
+
+  try {
+    const response = await fetch("https://api.languagetool.org/v2/check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams({
+        text: text,
+        language: "en-US"
+      })
+    });
+
+    const data = await response.json();
+    displayGrammarResults(text, data.matches);
+  } catch (error) {
+    console.error(error);
+    document.getElementById("grammarOutput").innerHTML = "Error checking grammar.";
+  }
+}
+
+function displayGrammarResults(originalText, matches) {
+  if (!matches.length) {
+    document.getElementById("grammarOutput").innerHTML = `
+      ✅ <strong>No grammar issues found!</strong>
+    `;
+    return;
+  }
+
+  let outputHTML = `<strong>Corrections:</strong><br><br>`;
+
+  matches.forEach((match, index) => {
+    const wrong = originalText.substr(match.offset, match.length);
+    const suggestion = match.replacements[0]?.value || "No suggestion";
+
+    outputHTML += `
+      <div style="margin-bottom:12px;">
+        ❌ <strong>Wrong:</strong> ${wrong}<br>
+        ✅ <strong>Correct:</strong> ${suggestion}<br>
+        📘 <strong>Explanation:</strong> ${match.message}
+      </div>
+    `;
+  });
+
+  document.getElementById("grammarOutput").innerHTML = outputHTML;
+}
+
+let grammarRecognition;
+let isGrammarRecording = false;
+
+function startGrammarSpeech() {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Speech recognition not supported in this browser.");
+    return;
+  }
+
+  grammarRecognition = new webkitSpeechRecognition();
+  grammarRecognition.continuous = true;
+  grammarRecognition.interimResults = true;
+  grammarRecognition.lang = "en-US";
+
+  let finalTranscript = "";
+
+  grammarRecognition.onresult = function(event) {
+    let interimTranscript = "";
+
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        finalTranscript += event.results[i][0].transcript + " ";
+      } else {
+        interimTranscript += event.results[i][0].transcript;
+      }
+    }
+
+    document.getElementById("grammarInput").value = finalTranscript + interimTranscript;
+  };
+
+  grammarRecognition.onerror = function(event) {
+    console.error("Grammar speech error:", event.error);
+  };
+
+  grammarRecognition.start();
+  isGrammarRecording = true;
+}
+
+function stopGrammarSpeech() {
+  if (grammarRecognition && isGrammarRecording) {
+    grammarRecognition.stop();
+    isGrammarRecording = false;
+  }
+}
+
+function saveEnglishProgress(score, wpm, fillers, vocabDiversity) {
+  const record = {
+    date: new Date().toLocaleDateString(),
+    score: score,
+    wpm: wpm,
+    fillers: fillers,
+    vocab: Math.round(vocabDiversity * 100)
+  };
+
+  let progress = JSON.parse(localStorage.getItem("englishProgress")) || [];
+  progress.push(record);
+  localStorage.setItem("englishProgress", JSON.stringify(progress));
+}
+
+

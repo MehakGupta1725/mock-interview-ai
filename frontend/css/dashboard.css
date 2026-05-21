@@ -193,3 +193,161 @@ button { cursor: pointer; border: none; font-family: inherit; font-weight: 600; 
 .text-success { color: #10b981 !important; }
 .text-warning { color: #f59e0b !important; }
 .text-danger { color: #ef4444 !important; }
+
+/* ================================
+   ENGLISH GYM – UI ENHANCEMENTS
+   ================================ */
+
+.english-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 24px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.english-tabs button {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.english-tabs button:hover {
+  background: var(--primary-light);
+  color: var(--primary-hover);
+  border-color: var(--primary);
+}
+
+.english-section {
+  padding: 20px;
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+.english-section h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.english-section p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* Speaking box */
+#englishSpeechText {
+  min-height: 140px;
+  margin: 12px 0;
+  background: #fff;
+}
+
+/* Feedback box */
+#englishFeedback {
+  margin-top: 16px;
+  padding: 16px;
+  background: #ecfeff;
+  border: 1px solid #67e8f9;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #155e75;
+}
+
+/* Grammar output */
+#grammarOutput {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #166534;
+}
+
+/* Pronunciation */
+#pronounceScore {
+  margin-top: 14px;
+  font-weight: 700;
+  color: var(--primary-hover);
+}
+
+/* Roleplay chat */
+#roleplayChat {
+  margin-top: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-height: 120px;
+  max-height: 260px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+/* Progress stats */
+#englishStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.english-stat-box {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.english-stat-box h5 {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.english-stat-box span {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary-hover);
+}
+
+/* Mic buttons */
+.english-section button {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+.english-section button:hover {
+  background: var(--primary-light);
+  color: var(--primary-hover);
+  border-color: var(--primary);
+}
+
+/* Mobile improvements */
+@media (max-width: 640px) {
+  .english-tabs {
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .english-tabs button {
+    white-space: nowrap;
+  }
+}
