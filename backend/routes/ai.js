@@ -15,7 +15,7 @@ router.post("/evaluate-answer", async (req, res) => {
 
     // 🔗 call Python AI
     const response = await axios.post(
-      "http://127.0.0.1:5001/evaluate",
+      "https://mock-interview-ai-1.onrender.com//evaluate",
       {
         user_answer: userAnswer,
         ideal_answer: idealAnswer,
